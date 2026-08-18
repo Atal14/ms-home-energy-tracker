@@ -6,10 +6,7 @@ import ms_home_energy_tracker.user_service.entity.User;
 import ms_home_energy_tracker.user_service.exception.ResourceNotFoundException;
 import ms_home_energy_tracker.user_service.repository.UserRepository;
 import org.springframework.beans.BeanUtils;
-import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Service;
-
-import java.util.Optional;
 
 @Slf4j
 @Service
@@ -22,14 +19,12 @@ public class UserService {
     }
 
     public UserDto getUserById(Long userId) {
-        log.info("getUserById : {}", userId);
         return userRepository.findById(userId)
                 .map(this::getUserDto)
                 .orElseThrow(() -> new ResourceNotFoundException("No User Found with Id: " + userId));
     }
 
     public UserDto createUser(UserDto newUser) {
-        log.info("Creating user : {}", newUser);
         final User createdUser = User.builder()
                 .name(newUser.getName())
                 .surname(newUser.getSurname())
@@ -44,8 +39,6 @@ public class UserService {
     }
 
     public UserDto updateUser(Long userId, UserDto updatedUserDto) {
-        log.info("Getting User for Update : {}", userId);
-
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new ResourceNotFoundException("User not found with id: " + userId));
         BeanUtils.copyProperties(updatedUserDto, user, "id");
@@ -55,7 +48,6 @@ public class UserService {
     }
 
     public void deleteUser(Long userId ) {
-        log.info("Deleting user : {}", userId);
         userRepository.deleteById(userId);
     }
 
