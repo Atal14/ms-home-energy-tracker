@@ -1,6 +1,5 @@
 package ms_home_energy_tracker.user_service.service;
 
-import lombok.extern.slf4j.Slf4j;
 import ms_home_energy_tracker.user_service.dto.UserDto;
 import ms_home_energy_tracker.user_service.entity.User;
 import ms_home_energy_tracker.user_service.exception.ResourceNotFoundException;
@@ -8,7 +7,6 @@ import ms_home_energy_tracker.user_service.repository.UserRepository;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
-@Slf4j
 @Service
 public class UserService {
 

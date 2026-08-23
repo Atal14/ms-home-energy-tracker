@@ -1,16 +1,14 @@
 package ms_home_energy_tracker.user_service.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @Entity
 @Table(name = "app_user")
 @AllArgsConstructor
 @NoArgsConstructor
-@Data
+@Getter
+@Setter
 @Builder
 public class User {
 
@@ -18,12 +16,23 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(nullable = false, length = 100)
     private String name;
-    private String surname;
-    private String email;
-    private String address;
-    private boolean alerting;
 
-    @Column(name = "energy_alerting_threshold")
-    private double alertingThreshold;
+    @Column(length = 100)
+    private String surname;
+
+    @Column(nullable = false, unique = true)
+    private String email;
+
+    @Column(columnDefinition = "TEXT")
+    private String address;
+
+    @Builder.Default
+    @Column(nullable = false)
+    private Boolean alerting = false;
+
+    @Builder.Default
+    @Column(name = "energy_alerting_threshold", nullable = false)
+    private Double alertingThreshold = 0.0;
 }
